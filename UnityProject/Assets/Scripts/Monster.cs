@@ -2,16 +2,13 @@
 public class Monster : MonoBehaviour
 {
 	[SerializeField]
-	Rigidbody mRigidbody = null;
+	GameObject mCameraHandle = null;
 	void Update()
 	{
 		var vec = Vector3.zero;
 		vec.x = Input.GetAxis("Horizontal");
 		vec.z = Input.GetAxis("Vertical");
-		transform.position += vec.normalized * 0.1f;
-	//	if(mRigidbody != null)
-	//	{
-	//		mRigidbody.AddForce(vec, ForceMode.VelocityChange);
-	//	}
+		transform.position += vec.normalized * 0.5f;
+		mCameraHandle.transform.position = transform.position;
 	}
 }
