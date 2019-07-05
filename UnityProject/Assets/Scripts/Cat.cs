@@ -16,12 +16,21 @@ public class Cat : MonoBehaviour
 		vec.y = Input.GetAxis("Vertical");
 		if(mRigid != null)
 		{
-			// mRigid.AddTorque(0.0f, 0.0f, -vec.x, ForceMode.VelocityChange);
-			 mRigid.AddForce(vec, ForceMode.VelocityChange);
+			mRigid.AddForce(vec, ForceMode.VelocityChange);
 		}
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
-			transform.localScale += Vector3.one;
+			float newAngle = mRigid.rotation.eulerAngles.z + 90.0f;
+			mRigid.MoveRotation(Quaternion.Euler(0.0f, 0.0f, newAngle));
 		}
+	}
+	void OnCollisionEnter(Collision inColl)
+	{
+		if(inColl.gameObject.tag != "Mag")
+		{
+			return;
+		}
+		// くっつける
+		inColl.transform.SetParent(transform);
 	}
 }
